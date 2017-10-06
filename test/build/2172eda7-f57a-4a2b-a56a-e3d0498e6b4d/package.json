@@ -1,0 +1,9 @@
+{
+  "name": "2172eda7-f57a-4a2b-a56a-e3d0498e6b4d",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@f/map": "^1.5.3"
+  }
+}
