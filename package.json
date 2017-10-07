@@ -9,7 +9,8 @@
   },
   "scripts": {
     "deploy": "gcloud app deploy",
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "tape test/*.js"
   },
   "dependencies": {
     "@f/filter": "^1.1.1",

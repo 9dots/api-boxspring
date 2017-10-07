@@ -19,12 +19,16 @@ test('should add', co.wrap(function * (t) {
 
   yield mkdirs(dir)
   let {name} = yield init(dir)
-  let {error, output} = yield add(dir, name, '@f/map')
+  let {error, output, bundleName} = yield add(dir, name, '@f/map')
   if (error) {
     console.log(output)
   }
   t.ok(yield exists(`${dir}/${name}/package.json`))
+  t.ok(yield exists(`${dir}/${name}/yarn.lock`))
 
-  //yield remove(dir)
+  t.ok(yield bucket.file(`${name}/package.json`).exists())
+  t.ok(yield bucket.file(`${name}/package.json`).exists())
+  t.ok(yield bucket.file(`${name}/builds/${bundleName}`).exists())
+  yield remove(dir)
   t.end()
 }))

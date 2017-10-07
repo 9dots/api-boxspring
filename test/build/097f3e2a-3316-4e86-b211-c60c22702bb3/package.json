@@ -1,9 +1,0 @@
-{
-  "name": "097f3e2a-3316-4e86-b211-c60c22702bb3",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "@f/map": "^1.5.3"
-  }
-}
