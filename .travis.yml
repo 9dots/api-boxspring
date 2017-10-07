@@ -1,5 +1,8 @@
 language: node_js
 node_js:
-  - "6"
+- '6'
 sudo: false
-script: "yarn run test"
+script: yarn run test
+before_install:
+- openssl aes-256-cbc -K $encrypted_479069d9e5a6_key -iv $encrypted_479069d9e5a6_iv
+  -in client_secrets.json.enc -out client_secrets.json -d
