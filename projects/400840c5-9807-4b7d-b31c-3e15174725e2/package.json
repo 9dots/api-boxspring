@@ -1,0 +1,9 @@
+{
+  "name": "400840c5-9807-4b7d-b31c-3e15174725e2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.19.3"
+  }
+}
