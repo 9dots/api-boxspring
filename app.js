@@ -3,6 +3,7 @@ const init = require('./lib/init');
 const add = require('./lib/add');
 const upgrade = require('./lib/upgrade');
 const remove = require('./lib/remove');
+const createAppBundle = require('./lib/createAppBundle');
 const getAppBundle = require('./lib/getAppBundle');
 const dependencies = require('./lib/dependencies');
 const getBundle = require('./lib/getBundle');
@@ -43,10 +44,10 @@ app.post("/init", upload.array(), async function (req, res) {
 //  name: UUID for project (given during init)
 //  pkg: package to be added
 app.post('/add', upload.array(), async function(req, res) {
-  console.log("==================================Add start=====================================")
+  console.log("\n\n==================================Add start=====================================")
   console.log("Add request received. name: " + req.body.name + " pkg: " + req.body.pkg)
   let {bundleName, error, output} = await add(DIR, req.body.name, req.body.pkg);   
-  console.log("==================================Add end=======================================\n")
+  console.log("==================================Add end=======================================\n\n")
   if (!error) {
     return res.status(200).send({ok:true, buildUrl: DIR + '/' + req.body.name + '/' + bundleName, tag: bundleName})
   } else {
@@ -58,10 +59,10 @@ app.post('/add', upload.array(), async function(req, res) {
 //  name: UUID for project (given during init)
 //  pkg: package to be upgraded
 app.post('/upgrade', upload.array(), async function (req, res) {
-  console.log("==================================Upgrade start=================================")
+  console.log("\n\n==================================Upgrade start=================================")
   console.log("Upgrade request received. name: " + req.body.name + " pkg: " + req.body.pkg)
   let {bundleName, error, output} = await upgrade(DIR, req.body.name, req.body.pkg);          
-  console.log("==================================Upgrade end===================================\n") 
+  console.log("==================================Upgrade end===================================\n\n") 
   if (!error) {
     return res.status(200).send({ok:true, buildUrl: DIR + '/' + req.body.name + '/' + bundleName, tag: bundleName})
   } else {
@@ -73,12 +74,12 @@ app.post('/upgrade', upload.array(), async function (req, res) {
 //  name: UUID for project (given during init)
 //  pkg: package to be removed
 app.post('/remove', upload.array(), async function (req, res) {
-  console.log("==================================Remove start==================================")
+  console.log("\n\n==================================Remove start==================================")
   console.log("Remove request received. name: " + req.body.name + " pkg: " + req.body.pkg)
 
   let {bundleName, error, output} = await remove(DIR, req.body.name, req.body.pkg);     
 
-  console.log("==================================Remove end====================================\n")       
+  console.log("==================================Remove end====================================\n\n")       
   if (!error) {
     return res.status(200).send({ok:true, buildUrl: DIR + '/' + req.body.name + '/' + bundleName, tag: bundleName})
   } else {
@@ -89,12 +90,12 @@ app.post('/remove', upload.array(), async function (req, res) {
 //required request parameters:
 //  name: UUID for project (given during init)
 app.post('/dependencies',  upload.array(), async function (req, res) {
-  console.log("==================================Dependencies start============================")
+  console.log("\n\n==================================Dependencies start============================")
   console.log("Dependencies request received. name: " + req.body.name)
 
   let {error, output} = await dependencies(DIR, req.body.name);               
   
-  console.log("==================================Dependencies end==============================\n")
+  console.log("==================================Dependencies end==============================\n\n")
   if (!error) {
     return res.status(200).send({ok:true, output})
   } else {
@@ -102,17 +103,30 @@ app.post('/dependencies',  upload.array(), async function (req, res) {
   }      
 })
 
+app.post('/createAppBundle',  upload.array(), async function (req, res) {
+  console.log("\n\n==================================createAppBundle start============================")
+  console.log("App bundle request received. name: " + req.body.name + " content:" + (req.body.content && true))
+
+  let {error, output, bundle} = await createAppBundle(DIR, req.body.name, req.body.content);
+
+  console.log("======================================createAppBundle end==========================\n\n")
+  if (!error) {
+    return res.status(200).send({ok:true, output, bundle})
+  } else {
+    return res.status(200).send({ok:false})  
+  }      
+})
 
 //required request parameters:
 //  name: UUID for project (given during init)
 //  bundle: name of bundle to be downloaded (given during add, upgrade, or remove)
 app.post('/getBundle',  upload.array(), async function (req, res) {
-  console.log("==================================getBundle start===============================")
+  console.log("\n\n==================================getBundle start===============================")
   console.log("Bundle request received. name: " + req.body.name + " bundle:" + req.body.bundle)
 
   let {error, output} = await getBundle(__dirname + "/bundles", DIR, req.body.name, req.body.bundle);
 
-  console.log("==================================getBundle end=================================\n")
+  console.log("==================================getBundle end=================================\n\n")
   if (!error) {
     return res.status(200).send({ok:true, output})
   } else {
@@ -121,12 +135,12 @@ app.post('/getBundle',  upload.array(), async function (req, res) {
 })
 
 app.post('/getAppBundle',  upload.array(), async function (req, res) {
-  console.log("==================================getAppBundle start============================")
+  console.log("\n\n==================================getAppBundle start============================")
   console.log("App bundle request received. name: " + req.body.name + " bundle:" + req.body.bundle)
 
   let {error, output} = await getAppBundle(DIR, req.body.name, req.body.bundle);
 
-  console.log("==================================getAppBundle end==============================\n")
+  console.log("==================================getAppBundle end==============================\n\n")
   if (!error) {
     return res.status(200).send({ok:true, output})
   } else {
