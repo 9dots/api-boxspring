@@ -6,6 +6,7 @@ const remove = require('./lib/remove');
 const createAppBundle = require('./lib/createAppBundle');
 const getAppBundle = require('./lib/getAppBundle');
 const dependencies = require('./lib/dependencies');
+const uploadSource = require('./lib/uploadSource');
 const getBundle = require('./lib/getBundle');
 const bodyParser = require('body-parser')
 const cors = require('cors')
@@ -24,7 +25,6 @@ const DIR = __dirname + '/projects'
 app.post("/init", upload.array(), async function (req, res) {
   console.log("==================================Init start====================================")
   console.log("Init received")
-  console.log(req)
   if(!req.body){
     console.log("no body")
     return res.status(200).send({ ok: false, error: "No body found" });
@@ -105,7 +105,7 @@ app.post('/dependencies',  upload.array(), async function (req, res) {
 
 app.post('/createAppBundle',  upload.array(), async function (req, res) {
   console.log("\n\n==================================createAppBundle start============================")
-  console.log("App bundle request received. name: " + req.body.name + " content:" + (req.body.content && true))
+  console.log("App bundle request received. name: " + req.body.name)
 
   let {error, output, bundle} = await createAppBundle(DIR, req.body.name, req.body.content);
 
@@ -148,6 +148,19 @@ app.post('/getAppBundle',  upload.array(), async function (req, res) {
   }      
 })
 
+app.post('/uploadSource',  upload.array(), async function (req, res) {
+  console.log("\n\n==================================uploadSource start============================")
+  console.log("name: " + req.body.name + " fileName:" + req.body.fileName)
+
+  let {error, output} = await uploadSource(DIR, req.body.name, req.body.fileName, req.body.content);
+
+  console.log("==================================uploadSource end==============================\n\n")
+  if (!error) {
+    return res.status(200).send({ok:true, output})
+  } else {
+    return res.status(200).send({ok:false, error:output})  
+  }      
+})
 
   
 // Start the server
