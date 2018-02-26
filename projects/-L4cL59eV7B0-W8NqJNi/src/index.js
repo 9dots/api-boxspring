@@ -13,9 +13,7 @@ class App extends React.Component {
   render () { 
     return (
       <div>
-        <h1>This only took a billion hoursfasre</h1>
-        <h3>This works too!</h3>
-        <button onClick={helloWorld}>This button actually works</button>
+        <button onClick={helloWorld}>This button actually works fam</button>
         <Extra/>
       </div>
     )

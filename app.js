@@ -113,7 +113,7 @@ app.post('/createAppBundle',  upload.array(), async function (req, res) {
   if (!error) {
     return res.status(200).send({ok:true, output, bundle})
   } else {
-    return res.status(200).send({ok:false})  
+    return res.status(200).send({ok:false, output})  
   }      
 })
 

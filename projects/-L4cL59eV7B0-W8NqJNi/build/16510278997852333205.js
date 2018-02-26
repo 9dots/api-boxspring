@@ -19022,6 +19022,7 @@ if (process.env.NODE_ENV === 'production') {
 const React = require('react')
 const ReactDom = require('react-dom')
 const createReactClass = require('create-react-class')
+const Test = require('./app3.js')
 // const img = require('image.png')
 
 
@@ -19029,20 +19030,40 @@ module.exports = createReactClass({
   render () { 
     return (
       React.createElement("div", null, 
-        React.createElement("h1", null, "This only took a billion hoursfasre")
+        React.createElement("h1", null, "This only took a billion hours. Made me wanna stab this project."), 
+        "vasrewscdrwe", 
+        React.createElement(Test, null)
       )
     )
   }
 })
 
-},{"create-react-class":3,"react":28,"react-dom":25}],30:[function(require,module,exports){
+},{"./app3.js":30,"create-react-class":3,"react":28,"react-dom":25}],30:[function(require,module,exports){
+/* index.js for vdasreawdfew */
+
+const React = require('react')
+const ReactDom = require('react-dom')
+const createReactClass = require('create-react-class')
+
+
+module.exports = createReactClass({ 
+  render () { 
+    return (
+      React.createElement("div", null, 
+        React.createElement("h4", null, "Multiple files works well")
+      )
+    )
+  }
+})
+
+},{"create-react-class":3,"react":28,"react-dom":25}],31:[function(require,module,exports){
 /* index.js for vdasreawdfew */
 
 const React = require('react')
 const ReactDom = require('react-dom')
 const Extra = require('./app2.js')
 // const img = require('image.png')
-console.log("Does this work")
+
 function helloWorld(){
   console.log("heyllo worl")
 }
@@ -19051,9 +19072,7 @@ class App extends React.Component {
   render () { 
     return (
       React.createElement("div", null, 
-        React.createElement("h1", null, "This only took a billion hoursfasre"), 
-        React.createElement("h3", null, "This works too!"), 
-        React.createElement("button", {onClick: helloWorld}, "This button actually works"), 
+        React.createElement("button", {onClick: helloWorld}, "This button actually works fam"), 
         React.createElement(Extra, null)
       )
     )
@@ -19062,4 +19081,4 @@ class App extends React.Component {
 
 ReactDom.render(React.createElement(App, null), document.getElementById('app')) 
 
-},{"./app2.js":29,"react":28,"react-dom":25}]},{},[29,30]);
+},{"./app2.js":29,"react":28,"react-dom":25}]},{},[29,30,31]);
