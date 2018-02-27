@@ -1,16 +1,15 @@
 /* index.js for vdasreawdfew */
+import React from 'react'
+import ReactDom from 'react-dom'
+// const img = require('image.png')
 
-const React = require('react')
-const ReactDom = require('react-dom')
-const createReactClass = require('create-react-class')
 
+const Test = (props) =>{ 
+  return (
+    <div>
+      <h2>Test</h2>
+    </div>
+  )
+}
 
-module.exports = createReactClass({ 
-  render () { 
-    return (
-      <div>
-        <h4>Multiple files works well</h4>
-      </div>
-    )
-  }
-})
+export default Test

@@ -105,11 +105,13 @@ app.post('/dependencies',  upload.array(), async function (req, res) {
 
 app.post('/createAppBundle',  upload.array(), async function (req, res) {
   console.log("\n\n==================================createAppBundle start============================")
+  console.time("browserify")
   console.log("App bundle request received. name: " + req.body.name)
 
   let {error, output, bundle} = await createAppBundle(DIR, req.body.name, req.body.content);
 
   console.log("======================================createAppBundle end==========================\n\n")
+  console.timeEnd("browserify")
   if (!error) {
     return res.status(200).send({ok:true, output, bundle})
   } else {

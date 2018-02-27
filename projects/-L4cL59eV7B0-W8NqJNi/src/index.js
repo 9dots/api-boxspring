@@ -1,23 +1,20 @@
-/* index.js for vdasreawdfew */
-
-const React = require('react')
-const ReactDom = require('react-dom')
-const Extra = require('./app2.js')
+ /* index.js for vdasreawdfew */
+import React from 'react'
+import ReactDom from 'react-dom'
+import Extra from './app2.js'
+import Logo from './img/defaulticon.png'
 // const img = require('image.png')
 
-function helloWorld(){
-  console.log("heyllo worl")
+
+const App = (props) =>{ 
+  return (
+    <div>
+      <div>App</div>
+      <div>Newest changes mayn</div>
+      <img src={Logo}/>
+      <Extra/>
+    </div>
+  )
 }
 
-class App extends React.Component { 
-  render () { 
-    return (
-      <div>
-        <button onClick={helloWorld}>This button actually works fam</button>
-        <Extra/>
-      </div>
-    )
-  }
-}
-
-ReactDom.render(<App/>, document.getElementById('app')) 
+ReactDom.render(<App/>, document.getElementById('app'))

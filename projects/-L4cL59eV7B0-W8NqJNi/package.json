@@ -13,6 +13,7 @@
     "is-sorted": "^1.0.4",
     "map-array": "^1.2.1",
     "mirrarray": "^2.0.0",
+    "parcel-bundler": "^1.6.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "redux": "^3.7.2"
