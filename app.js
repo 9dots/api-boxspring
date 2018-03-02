@@ -49,7 +49,7 @@ app.post('/add', upload.array(), async function(req, res) {
   let {bundleName, error, output} = await add(DIR, req.body.name, req.body.pkg);   
   console.log("==================================Add end=======================================\n\n")
   if (!error) {
-    return res.status(200).send({ok:true, buildUrl: DIR + '/' + req.body.name + '/' + bundleName, tag: bundleName})
+    return res.status(200).send({ok:true,})
   } else {
     return res.status(200).send({ok:false, error:output})
   }
@@ -64,7 +64,7 @@ app.post('/upgrade', upload.array(), async function (req, res) {
   let {bundleName, error, output} = await upgrade(DIR, req.body.name, req.body.pkg);          
   console.log("==================================Upgrade end===================================\n\n") 
   if (!error) {
-    return res.status(200).send({ok:true, buildUrl: DIR + '/' + req.body.name + '/' + bundleName, tag: bundleName})
+    return res.status(200).send({ok:true,})
   } else {
     return res.status(200).send({ok:false, error:output})
   }
@@ -81,7 +81,7 @@ app.post('/remove', upload.array(), async function (req, res) {
 
   console.log("==================================Remove end====================================\n\n")       
   if (!error) {
-    return res.status(200).send({ok:true, buildUrl: DIR + '/' + req.body.name + '/' + bundleName, tag: bundleName})
+    return res.status(200).send({ok:true})
   } else {
     return res.status(200).send({ok:false, error:output})
   }
@@ -105,17 +105,17 @@ app.post('/dependencies',  upload.array(), async function (req, res) {
 
 app.post('/createAppBundle',  upload.array(), async function (req, res) {
   console.log("\n\n==================================createAppBundle start============================")
-  console.time("browserify")
+  console.time("createAppBundle")
   console.log("App bundle request received. name: " + req.body.name)
 
-  let {error, output, bundle} = await createAppBundle(DIR, req.body.name, req.body.content);
+  let {error, output, bundle} = await createAppBundle(DIR, req.body.name, req.body.files);
 
+  console.timeEnd("createAppBundle")
   console.log("======================================createAppBundle end==========================\n\n")
-  console.timeEnd("browserify")
   if (!error) {
-    return res.status(200).send({ok:true, output, bundle})
+    return res.status(200).send({ok:true, output})
   } else {
-    return res.status(200).send({ok:false, output})  
+    return res.status(200).send({ok:false})  
   }      
 })
 
